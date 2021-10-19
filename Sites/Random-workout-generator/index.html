@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sites | Random Workout Generator</title>
+</head>
+<body>
+
+    <main>
+        <h1>
+            Random Workout Generator
+        </h1>
+
+        <section>
+
+            <form>
+                <div class="form-item">
+                    <label for="numberExcersie">Number of exercises:</label>
+                    <input type="number" name="numberExercises" id="numberExercises">
+                </div>
+                <div class="form-item">
+                    <label for="workoutType">Select workout type</label>
+                    <select name="workoutType" id="workoutType">
+                        <option value="Strength">Strength</option>
+                        <option value="Hypertrophy">Hypertrophy</option>
+                        <option value="Endurance">Endurance</option>
+                        <option value="HIIT">HIIT</option>
+                    </select>
+                </div>
+                <button type="button" onclick="generateExercise()">Create Workout</button>
+            </form>
+            
+        </section>
+
+        <section class="notes">
+            <ul>
+                <li style="text-decoration: line-through;">Maybe break isolation exercises into timed and rep versions (i.e. plank is timed but bicep curl is rep)</li>
+                <li style="text-decoration: line-through;">Rep ranges for isolation exercises need some additional work - 1 rep of bicep curls isn't good! </li>
+                <li>Sets for HIIT need some work - it looks like you need to repeat the exercise x times in a row
+                    <ul>
+                        <li>HIIT might be best to do in a different HTML/JS file</li>
+                    </ul>
+
+                </li>
+                <li style="text-decoration: line-through;">Need to include rest times</li>
+                <li>Need to include weight - RM (repition maximum)</li>
+            </ul>
+        </section>
+
+        <section id="exerciseTable">
+
+        </section>
+    </main>
+
+
+    <script src="./index.js"></script>
+    
+</body>
+</html>
