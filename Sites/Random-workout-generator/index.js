@@ -32,6 +32,7 @@ let exerciseIsolation = [
     "V-Sits", 
     "Bicycle Kicks", 
     "Russian Twists", 
+    "Commandos",
 
     // timed exercises
     "Plank", 
@@ -45,24 +46,168 @@ let exerciseIsolationTimed = [
     "Wall Sit"
 ];
 
+let exerciseHiit = [
+    "Bulgarian split squat",
+    "Lunge", 
+    "Glute Bridge", 
+    "Standing Calf Raise", 
+    "Good Mornings", 
+    "Superman", 
+    "Press Up", 
+    "Tricep Dips", 
+    "Sit Ups", 
+    "V-Sits", 
+    "Bicycle Kicks", 
+    "Russian Twists", 
+    "Commandos",
+    "Plank", 
+    "Side Plank", 
+    "Wall Sit", 
+    "Squat", 
+    "Jumping Jacks", 
+    "High Knees",
+    "Jog", 
+    "Sprint", 
+    "Mountain Climbers", 
+    "Shadow Boxing", 
+    "Burpees", 
+    "Tuck Jumps", 
+    "Squat Jumps"
+
+]; 
+
+let rm = {
+    1: "100%",
+    2: "97%",
+    3: "94%",
+    4: "92%",
+    5: "89%",
+    6: "86%",
+    7: "83%",
+    8: "81%",
+    9: "78%",
+    10: "75%",
+    11: "73%",
+    12: "71%",
+    13: "70%",
+    14: "68%",
+    15: "67%",
+    16: "65%",
+    17: "64%",
+    18: "63%",
+    19: "61%",
+    20: "60%",
+    21: "59%",
+    22: "58%",
+    23: "57%",
+    24: "56%",
+    25: "55%",
+    26: "54%",
+    27: "53%",
+    28: "52%",
+    29: "51%",
+    30: "50%" 
+    
+}
+
+
+let weightLiftingWorkout = document.getElementById("selectWeightLifting"); 
+let hiitWorkout = document.getElementById("selectHiit");
+let weightLiftingSection = document.getElementById("weightLifting");
+let hiitSection = document.getElementById("hiit");
+let createWorkoutWeightLifting = document.getElementById("btnWeightLiftingWorkout"); 
+let createWorkoutHiit = document.getElementById("btnHiitWorkout"); 
 
 
 
+
+
+generateExercise(); 
+
+weightLiftingWorkout.addEventListener("click", function() {
+    hiitSection.classList.add("hidden"); 
+    weightLiftingSection.classList.remove("hidden"); 
+});
+
+hiitWorkout.addEventListener("click", function() {
+    weightLiftingSection.classList.add("hidden"); 
+    hiitSection.classList.remove("hidden"); 
+});
+
+
+createWorkoutWeightLifting.addEventListener("click", generateExercise); 
+createWorkoutHiit.addEventListener("click", generateHiit); 
+
+
+
+let tableExercise = document.getElementById("exerciseTable");
+
+tableExercise.addEventListener("click", function(event) {
+    if (event.target.matches("div")) {
+        document.getElementById(event.target.id).parentElement.classList.toggle("done");
+    }
+})
+
+// Functions 
+
+
+function generateHiit() {
+    let exerciseTable = document.getElementById("exerciseTable"); 
+    let numberExercises = document.getElementById("numberExercisesHiit").value; 
+    let numberRounds = document.getElementById("hiitRounds").value; 
+    let workTime = document.getElementById("hiitWork").value; 
+    let restTime = document.getElementById("hiitRest").value; 
+    let exerciseList = []; 
+    let innerHTMLString = `<h2>Number of rounds to complete: ${numberRounds}</h2>
+                            <div class="containerMain">
+                                <div class="container containerHiit">
+                                    <div class="fw-bold">Exercise</div>
+                                    <div class="fw-bold">Reps</div>
+                                    <div class="fw-bold">Rest</div>
+                                </div>
+                            `;
+
+
+    for (let i = 0; i < numberExercises; i++){
+        let exerciseType = "HIIT";
+        // Get exercise
+        exerciseList =  exerciseFunc(exerciseList,exerciseType); 
+        exercise=exerciseList[i];
+
+        innerHTMLString += `<div id="id-${i}" class="container containerHiit">
+                                <div id = "class-${i}">${exerciseList[i]}</div>
+                                <div id = "class-${i}">${workTime + " seconds"}</div>
+                                <div id = "class-${i}">${restTime + " seconds"}</div>
+                            </div>
+                            `;
+
+
+
+    }
+
+    innerHTMLString += "</div>"; 
+    exerciseTable.innerHTML = innerHTMLString; 
+
+
+    
+
+}
 
 
 function generateExercise() {
     let exerciseTable = document.getElementById("exerciseTable"); 
     let numberExercises = document.getElementById("numberExercises").value; 
     let exerciseList = []; 
-    let innerHTMLString = `<table>
-                                <th>
-                                    <tr>
-                                        <td>Exercise</td>
-                                        <td>reps</td>
-                                        <td>sets</td>
-                                        <td>rest</td>
-                                    <tr>
-                                </th>`; 
+    
+    let innerHTMLString = `<div class="containerMain">
+                                <div class="container">
+                                <div class="fw-bold">Exercise</div>
+                                <div class="fw-bold">Weight (%1rm)</div>
+                                <div class="fw-bold">Reps</div>
+                                <div class="fw-bold">Sets</div>
+                                <div class="fw-bold">Rest</div>
+                                </div>
+        `;
 
 
     for (let i = 0; i < numberExercises; i++) {
@@ -70,6 +215,7 @@ function generateExercise() {
         let rep; 
         let set; 
         let rest; 
+        let maxWeight;
         let exerciseType;
         let exercise; 
 
@@ -94,19 +240,27 @@ function generateExercise() {
         // rest per exercise
         rest = restRange(exerciseType); 
 
+        //Maximum weight per exercise
 
-        
+        if (String(rep).includes("Seconds") ) {
+            maxWeight="-"; 
+        } else {
+            maxWeight = rm[rep]; 
+        }
 
-        innerHTMLString += `<tr>
-                        <td>${exerciseList[i]}</td>
-                        <td>${rep}</td>
-                        <td>${set}</td>
-                        <td>${rest}</td>
-                    </tr>`;
+        innerHTMLString += `
+                                <div id="id-${i}" class="container">
+                                    <div id = "class-${i}">${exerciseList[i]}</div>
+                                    <div id = "class-${i}">${maxWeight}</div>
+                                    <div id = "class-${i}">${rep}</div>
+                                    <div id = "class-${i}">${set}</div>
+                                    <div id = "class-${i}">${rest}</div>
+                                </div>                                   
+                                `;
 
     }
-
-    innerHTMLString += "</table>"
+    
+    innerHTMLString += "</div>";
     exerciseTable.innerHTML = innerHTMLString; 
 
 }
@@ -126,9 +280,7 @@ function repRange(exerciseType, timed) {
             rep = Math.floor(Math.random() * (12 - 5) + 6);
         } else if (workoutType == "Endurance") { 
             rep = Math.floor(Math.random() * (20 - 12) + 13);
-        } else if (workoutType == "HIIT") { 
-            rep =  hiitReps[Math.floor(Math.random() * hiitReps.length)] + " Seconds";
-        }
+        } 
     } else if (exerciseIsolationTimed.indexOf(timed) != -1) {
         rep =  hiitReps[Math.floor(Math.random() * hiitReps.length)] + " Seconds";
     } else {
@@ -145,6 +297,9 @@ function exerciseFunc(arr,type) {
 
     if (type == "Compound") { 
         exercise = exerciseCompound[Math.floor(Math.random() * exerciseCompound.length)]; 
+    } else if (type == "HIIT") {
+        exercise = exerciseHiit[Math.floor(Math.random() * exerciseHiit.length)];
+
     } else  {
         exercise = exerciseIsolation[Math.floor(Math.random() * exerciseIsolation.length)]; 
     }
@@ -173,11 +328,7 @@ function setRange(exerciseType) {
             set = Math.floor(Math.random() * (5 - 2) + 3);
         } else if (workoutType == "Endurance") { 
             set = Math.floor(Math.random() * (3 - 1) + 2);
-        } else if (workoutType == "HIIT") { 
-            set =  Math.floor(Math.random() * (3 - 1) + 2);
-        } 
-    } else if (exerciseType == "Isolation-timed") {
-        set = Math.floor(Math.random() * (3 - 1) + 2);
+        }  
     } else {
         set = Math.floor(Math.random() * (3 - 1) + 2);
     }
@@ -199,7 +350,9 @@ function restRange(exerciseType) {
             rest = "2 - 3 minutes";
         } else if (workoutType == "Hypertrophy") { 
             rest = "1 - 3 minutes";
-        } 
+        } else {
+            rest = "30 - 90 seconds";
+        }
     } else {
         rest = "30 - 90 seconds";
     }
@@ -209,3 +362,6 @@ function restRange(exerciseType) {
     return rest; 
 
 }
+
+
+
