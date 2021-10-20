@@ -143,7 +143,7 @@ createWorkoutHiit.addEventListener("click", generateHiit);
 let tableExercise = document.getElementById("exerciseTable");
 
 tableExercise.addEventListener("click", function(event) {
-    if (event.target.matches("div")) {
+    if (event.target.matches("td")) {
         document.getElementById(event.target.id).parentElement.classList.toggle("done");
     }
 })
@@ -158,13 +158,24 @@ function generateHiit() {
     let workTime = document.getElementById("hiitWork").value; 
     let restTime = document.getElementById("hiitRest").value; 
     let exerciseList = []; 
+    // let innerHTMLString = `<h2>Number of rounds to complete: ${numberRounds}</h2>
+    //                         <div class="containerMain">
+    //                             <div class="container containerHiit">
+    //                                 <div class="fw-bold">Exercise</div>
+    //                                 <div class="fw-bold">Reps</div>
+    //                                 <div class="fw-bold">Rest</div>
+    //                             </div>
+    //                         `;
+
     let innerHTMLString = `<h2>Number of rounds to complete: ${numberRounds}</h2>
-                            <div class="containerMain">
-                                <div class="container containerHiit">
-                                    <div class="fw-bold">Exercise</div>
-                                    <div class="fw-bold">Reps</div>
-                                    <div class="fw-bold">Rest</div>
-                                </div>
+                            <table>
+                                <thead class="fw-bold">
+                                    <tr>
+                                        <td id="tableHeader">Exercise</td>
+                                        <td id="tableHeader">Reps</td>
+                                        <td id="tableHeader">Rest</td>
+                                    </tr>
+                                </thead>
                             `;
 
 
@@ -174,18 +185,24 @@ function generateHiit() {
         exerciseList =  exerciseFunc(exerciseList,exerciseType); 
         exercise=exerciseList[i];
 
-        innerHTMLString += `<div id="id-${i}" class="container containerHiit">
-                                <div id = "class-${i}">${exerciseList[i]}</div>
-                                <div id = "class-${i}">${workTime + " seconds"}</div>
-                                <div id = "class-${i}">${restTime + " seconds"}</div>
-                            </div>
+        // innerHTMLString += `<div id="id-${i}" class="container containerHiit">
+        //                         <div id = "class-${i}">${exerciseList[i]}</div>
+        //                         <div id = "class-${i}">${workTime + " seconds"}</div>
+        //                         <div id = "class-${i}">${restTime + " seconds"}</div>
+        //                     </div>
+        //                     `;
+
+        innerHTMLString += `<tr id="id-${i}">
+                                <td id = "class-${i}">${exerciseList[i]}</td>
+                                <td id = "class-${i}">${workTime + " seconds"}</td>
+                                <td id = "class-${i}">${restTime + " seconds"}</td>
+                            </tr>
                             `;
-
-
 
     }
 
-    innerHTMLString += "</div>"; 
+    // innerHTMLString += "</div>"; 
+    innerHTMLString += "</table>"; 
     exerciseTable.innerHTML = innerHTMLString; 
 
 
@@ -199,14 +216,26 @@ function generateExercise() {
     let numberExercises = document.getElementById("numberExercises").value; 
     let exerciseList = []; 
     
-    let innerHTMLString = `<div class="containerMain">
-                                <div class="container">
-                                <div class="fw-bold">Exercise</div>
-                                <div class="fw-bold">Weight (%1rm)</div>
-                                <div class="fw-bold">Reps</div>
-                                <div class="fw-bold">Sets</div>
-                                <div class="fw-bold">Rest</div>
-                                </div>
+    // let innerHTMLString = `<div class="containerMain">
+    //                             <div class="container">
+    //                             <div class="fw-bold">Exercise</div>
+    //                             <div class="fw-bold">Weight (%1rm)</div>
+    //                             <div class="fw-bold">Reps</div>
+    //                             <div class="fw-bold">Sets</div>
+    //                             <div class="fw-bold">Rest</div>
+    //                             </div>
+    //     `;
+
+    let innerHTMLString = `<table>
+                                <thead class="fw-bold">
+                                    <tr>
+                                        <td id="tableHeader">Exercise</td>
+                                        <td id="tableHeader">Weight (%1rm)</td>
+                                        <td id="tableHeader">Reps</td>
+                                        <td id="tableHeader">Sets</td>
+                                        <td id="tableHeader">Rest</td>
+                                    </tr>
+                                </thead>
         `;
 
 
@@ -248,19 +277,30 @@ function generateExercise() {
             maxWeight = rm[rep]; 
         }
 
-        innerHTMLString += `
-                                <div id="id-${i}" class="container">
-                                    <div id = "class-${i}">${exerciseList[i]}</div>
-                                    <div id = "class-${i}">${maxWeight}</div>
-                                    <div id = "class-${i}">${rep}</div>
-                                    <div id = "class-${i}">${set}</div>
-                                    <div id = "class-${i}">${rest}</div>
-                                </div>                                   
-                                `;
+        // innerHTMLString += `
+        //                         <div id="id-${i}" class="container">
+        //                             <div id = "class-${i}">${exerciseList[i]}</div>
+        //                             <div id = "class-${i}">${maxWeight}</div>
+        //                             <div id = "class-${i}">${rep}</div>
+        //                             <div id = "class-${i}">${set}</div>
+        //                             <div id = "class-${i}">${rest}</div>
+        //                         </div>                                   
+        //                         `;
 
+
+        innerHTMLString += `
+                                <tr id="id-${i}">
+                                    <td id = "class-${i}">${exerciseList[i]}</td>
+                                    <td id = "class-${i}">${maxWeight}</td>
+                                    <td id = "class-${i}">${rep}</td>
+                                    <td id = "class-${i}">${set}</td>
+                                    <td id = "class-${i}">${rest}</td>
+                                </tr>                                   
+                                `;
     }
     
-    innerHTMLString += "</div>";
+    // innerHTMLString += "</div>";
+    innerHTMLString += "</table>";
     exerciseTable.innerHTML = innerHTMLString; 
 
 }
