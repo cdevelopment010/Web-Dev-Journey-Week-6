@@ -18,6 +18,10 @@ https://coolors.co/e63946-f1faee-a8dadc-457b9d-1d3557
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 main {
     width: 90%; 
     margin: 1.5rem auto;
@@ -36,6 +40,13 @@ button {
     border: none; 
     background: var(--secondary);
     color: var(--tertiary);
+    width: 50%; 
+    margin: 0 auto;
+    font-family: inherit;
+}
+
+button:hover { 
+    background-color: var(--primary); 
 }
 
 table {
@@ -80,7 +91,9 @@ td {
 }
 
 
-
+form { 
+    display: grid; 
+}
  
 .form-item {
     display: grid;    
@@ -90,4 +103,9 @@ td {
 
 .done {
     background: var(--primary); 
+}
+
+.exerciseType { 
+    display: grid; 
+    gap: 5px;
 }

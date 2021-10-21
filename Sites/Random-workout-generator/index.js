@@ -178,6 +178,13 @@ function generateHiit() {
                                 </thead>
                             `;
 
+    // Use placeholder values for work/rest time if blank
+    if (workTime == "" || workTime == "null" || workTime == "undefined") { 
+        workTime = document.getElementById("hiitWork").getAttribute("placeholder");  
+    }
+    if (restTime == "" || restTime == "null" || restTime == "undefined") { 
+        restTime = document.getElementById("hiitRest").getAttribute("placeholder"); 
+    } 
 
     for (let i = 0; i < numberExercises; i++){
         let exerciseType = "HIIT";
