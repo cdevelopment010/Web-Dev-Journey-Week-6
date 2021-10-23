@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,100;0,400;0,700;1,400&display=swap" rel="stylesheet">
 
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- custom CSS -->
     <link rel="stylesheet" href="./style.css">
 
@@ -22,12 +25,16 @@
     <main>
 
         <section class="header">
-            <div class="contianer">
-                <div class="headline-img">
-                    
+            <div class="container">
+                <div class="headline-img img">
+                    <div class="text">Photo by airam-datoon from Pexels</div>
                 </div>
-                <div class="sub-img1"></div>
-                <div class="sub-img2"></div>
+                <div class="sub-img1 hidden img">
+                    <div class="text">Photo by HARSH KUSHWAHA from Pexels</div>
+                </div>
+                <div class="sub-img2 hidden img">
+                    <div class="text">Photo by HARSH KUSHWAHA from Pexels</div>
+                </div>
             </div>
             <div class="headline">
                 <h1>
@@ -85,10 +92,11 @@
 
         <section class="contact">
             <h2>Contact</h2>
-
-            <div class="container">
-                <form>
-                    <input type="text" name="name" id="name" placeholder="Name">
+            <div class="container-form">
+                <p>Want to have a photoshoot? Send me a message with what you would like and I'll get back to you. </p>
+            
+                <form autocomplete="off">
+                    <input type="text" name="name" id="name" placeholder="Name" autocomplete="name">
                     <input type="email" name="email" id="email" placeholder="Email">
                     <textarea name="message" id="message" cols="30" rows="10" placeholder="Type your message here. "></textarea>
                     <button type="submit">Send message</button>
@@ -96,14 +104,26 @@
             </div>
 
             <div class="container">
-                <div class="img"></div>
-                <div class="img"></div>
+                <div class="img img-marina">
+                    <!-- <img src="./assets/pexels-marina-gr-9880089.jpg" alt=""> -->
+                    <div class="text">Photo by Marina Gr from Pexels</div>
+                </div>
+                <div class="img img-skitterphoto">
+                    <!-- <img src="./assets/pexels-skitterphoto-240040.jpg" alt=""> -->
+                    <div class="text">Skitterphoto</div>
+                </div>
             </div>
         </section>
     </main>
 
 
-    <footer>
+    <footer>    
+        <ul>
+            <li><i class="fa fa-instagram"></i></li>
+            <li><i class="fa fa-pinterest"></i></li>
+            <li><i class="fa fa-facebook"></i></li>
+            <li><i class="fa fa-linkedin"></i></li>
+        </ul>
 
     </footer>
     

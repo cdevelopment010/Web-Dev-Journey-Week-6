@@ -33,6 +33,7 @@ h2 {
     margin: 1rem auto;
     padding: 0.2rem;
     position: relative;
+    width: -moz-fit-content;
     width: fit-content;
 }
 
@@ -56,6 +57,44 @@ h2:after {
     background-color: #333;
 }
 
+li {
+    list-style: none;
+    cursor: pointer;
+}
+
+li:hover {
+    color: #EEEEEE;
+}
+
+form {
+    margin: 1rem 0;
+    display: grid; 
+    gap: 10px; 
+}
+
+form > * {
+    padding: 0.5rem;
+    font-family: inherit; 
+}
+
+input:focus, textarea:focus {
+    outline: 1px solid #820B8A;
+}
+
+button { 
+    background-color: #820B8A; 
+    border: 1px solid transparent; 
+    border-radius: 10px; 
+    color: white; 
+    font-family: inherit;
+
+}
+
+
+button:hover, 
+button:focus {
+    background-color: #04080F; 
+}
 
 
 .header {
@@ -63,25 +102,42 @@ h2:after {
     grid-template-columns: 1fr 1fr;
 }
 
+
+div .hidden { 
+    display: none;
+}
+
+/* footer */
+
 footer {
     background-color: #333; 
-    min-height: max(10vh,100px);
+    height: max(10vh,100px);
     color: white; 
     margin-top: auto;
     width: 100%; 
 }
+
+footer ul {
+    height: 100%; 
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 
 
 /* Header section */
 
 /* main image */
 
-.headline-img {
+div .headline-img {
     background: url("./assets/pexels-airam-datoon-3389817.jpg");
     height: 100%; 
     width: 100%; 
-    background-position: center;
+    
     background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
 
@@ -152,7 +208,9 @@ footer {
 
 .img .text {
     position: absolute; 
-    opacity: 0; 
+    opacity: 0; /* Standard compliant browsers */
+   -moz-opacity: 0; /* Firefox and Mozilla browsers */
+   -webkit-opacity: 0; /* WebKit browser e.g. Safari */
     height: 100%; 
     width: 100%; 
     background-color: rgba(0,0,0,0.5);
@@ -166,11 +224,19 @@ footer {
 
 
 .img:hover .text {
-    opacity: 100%; 
+    opacity: 1; /* Standard compliant browsers */
+   -moz-opacity: 1; /* Firefox and Mozilla browsers */
+   -webkit-opacity: 1; /* WebKit browser e.g. Safari */
 }
 
 
+/* contact section */
 
+.contact .container { 
+    display: grid; 
+    gap: 20px;
+    justify-content: center;
+}
 
 /* Media queries */
 
@@ -179,16 +245,69 @@ footer {
     main {
         width: 80%;
         margin: 0 auto;
-        
         grid-template-rows: 60vh auto;
-    }
-
-    .header {
-        align-items: center; 
     }
 
     .img {
         height: 250px; 
         width: 250px; 
+    }
+
+    .header {
+        align-items: center; 
+        width: 80%;
+        margin: 0 auto;
+    }
+
+
+    .header .container {
+        height: 60vh; 
+        display: grid; 
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: repeat(3,1fr); 
+        grid-template-areas: "main-img main-img ."
+            "main-img main-img sub-img1"
+            "sub-img2 sub-img2 sub-img1"
+        ;  
+        gap: 10px;
+
+    }
+
+    .headline-img {
+        grid-area: main-img; 
+    }
+
+    .sub-img1 {
+        grid-area: sub-img1; 
+        height: 100%; 
+        width: 100%;
+    }
+    .sub-img2 {
+        grid-area: sub-img2; 
+        height: 100%; 
+        width: 100%;
+    }
+
+    div .hidden { 
+        display: block;
+    }
+
+   
+
+
+    .contact { 
+        width: 80%; 
+        margin: 0 auto;
+        display: grid; 
+        grid-template-columns: 1fr 0.5fr;
+        grid-template-areas: "header header" 
+            "form images"; 
+
+        align-items: center;
+        gap: 20px;
+    }
+
+    .contact h2 {
+        grid-area: header; 
     }
 }
